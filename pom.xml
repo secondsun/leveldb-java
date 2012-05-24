@@ -7,6 +7,7 @@
 	<groupId>org.leveldb</groupId>
 	<artifactId>leveldb-core</artifactId>
 	<version>0.1-SNAPSHOT</version>
+	<name>leveldb-java</name>
 	<description>Java port of LevelDB</description>
 	<url>https://github.com/avityuk/leveldb-java</url>
 
@@ -20,14 +21,16 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
-		<jxr.version>2.3</jxr.version>
+		<site.plugin.version>3.1</site.plugin.version>
 
-		<checkstyle.version>2.9.1</checkstyle.version>
+		<jxr.plugin.version>2.3</jxr.plugin.version>
+
+		<checkstyle.plugin.version>2.9.1</checkstyle.plugin.version>
 		<checkstyle.configLocation>/build-tools/checkstyle.xml</checkstyle.configLocation>
 
-		<pmd.version>2.7.1</pmd.version>
+		<pmd.plugin.version>2.7.1</pmd.plugin.version>
 
-		<findbugs.version>2.4.0</findbugs.version>
+		<findbugs.plugin.version>2.4.0</findbugs.plugin.version>
 	</properties>
 
 	<build>
@@ -41,16 +44,22 @@
 				</configuration>
 			</plugin>
 
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-site-plugin</artifactId>
+				<version>${site.plugin.version}</version>
+			</plugin>
+
 			<!-- Code quality -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-jxr-plugin</artifactId>
-				<version>${jxr.version}</version>
+				<version>${jxr.plugin.version}</version>
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-checkstyle-plugin</artifactId>
-				<version>${checkstyle.version}</version>
+				<version>${checkstyle.plugin.version}</version>
 				<configuration>
 					<configLocation>${checkstyle.configLocation}</configLocation>
 					<failsOnError>true</failsOnError>
@@ -69,7 +78,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-pmd-plugin</artifactId>
-				<version>${pmd.version}</version>
+				<version>${pmd.plugin.version}</version>
 				<configuration>
 					<targetJdk>1.6</targetJdk>
 				</configuration>
@@ -77,11 +86,16 @@
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>findbugs-maven-plugin</artifactId>
-				<version>${findbugs.version}</version>
+				<version>${findbugs.plugin.version}</version>
 				<configuration>
 					<effort>Max</effort>
 					<threshold>High</threshold>
 				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-report-plugin</artifactId>
+				<version>2.12</version>
 			</plugin>
 		</plugins>
 	</build>
@@ -90,12 +104,12 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-jxr-plugin</artifactId>
-				<version>${jxr.version}</version>
+				<version>${jxr.plugin.version}</version>
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-checkstyle-plugin</artifactId>
-				<version>${checkstyle.version}</version>
+				<version>${checkstyle.plugin.version}</version>
 				<configuration>
 					<configLocation>${checkstyle.configLocation}</configLocation>
 				</configuration>
@@ -103,7 +117,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-pmd-plugin</artifactId>
-				<version>${pmd.version}</version>
+				<version>${pmd.plugin.version}</version>
 				<configuration>
 					<targetJdk>1.6</targetJdk>
 					<linkXRef>true</linkXRef>
@@ -112,12 +126,17 @@
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>findbugs-maven-plugin</artifactId>
-				<version>${findbugs.version}</version>
+				<version>${findbugs.plugin.version}</version>
 				<configuration>
 					<xmlOutput>true</xmlOutput>
 					<effort>Max</effort>
 					<threshold>High</threshold>
 				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-report-plugin</artifactId>
+				<version>2.12</version>
 			</plugin>
 		</plugins>
 	</reporting>
