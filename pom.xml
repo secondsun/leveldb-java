@@ -21,6 +21,7 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
+		<compiler.plugin.version>2.5</compiler.plugin.version>
 		<site.plugin.version>3.1</site.plugin.version>
 
 		<jxr.plugin.version>2.3</jxr.plugin.version>
@@ -38,6 +39,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
+				<version>${compiler.plugin.version}</version>
 				<configuration>
 					<source>1.6</source>
 					<target>1.6</target>
