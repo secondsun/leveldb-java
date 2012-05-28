@@ -30,7 +30,7 @@ public class WriteBatch {
 		void delete(byte[] key);
 	}
 
-	private List<Operation> operations = Lists.newArrayListWithExpectedSize(1);
+	private final List<Operation> operations = Lists.newArrayListWithCapacity(1);
 
 
 	public void put(byte[] key, byte[] value) {
