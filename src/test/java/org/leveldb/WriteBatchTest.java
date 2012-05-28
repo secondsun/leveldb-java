@@ -19,12 +19,9 @@ package org.leveldb;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-
-import java.nio.ByteBuffer;
+import org.mockito.InOrder;
 
 import static org.mockito.Mockito.*;
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.*;
 
 public class WriteBatchTest {
 	private WriteBatch writeBatch;
@@ -38,39 +35,71 @@ public class WriteBatchTest {
 
 	@After
 	public void tearDown() throws Exception {
-		verifyNoMoreInteractions(handler);
 		writeBatch = null;
 		handler = null;
 	}
 
-	@Test public void
-	shouldPutValueByKey() throws Exception {
+	@Test
+	public void
+	shouldRecordPutOperation() throws Exception {
 		String key = "test key";
 		String value = "test value";
 		writeBatch.put(key.getBytes(), value.getBytes());
 
 		writeBatch.forEach(handler);
 
-		verify(handler).put(ByteBuffer.wrap(key.getBytes()), ByteBuffer.wrap(value.getBytes()));
+		verify(handler).put(key.getBytes(), value.getBytes());
+		verifyNoMoreInteractions(handler);
 	}
 
 	@Test
-	public void testDelete() throws Exception {
+	public void
+	shouldRecordDeleteOperation() throws Exception {
+		String key = "test key";
+		writeBatch.delete(key.getBytes());
+
+		writeBatch.forEach(handler);
+
+		verify(handler).delete(key.getBytes());
+		verifyNoMoreInteractions(handler);
 
 	}
 
 	@Test
-	public void testClear() throws Exception {
+	public void
+	shouldRecordMultipleOperations() throws Exception {
+		InOrder inOrder = inOrder(handler);
 
+		String key1 = "test key 1";
+		String value1 = "test value 1";
+		String key2 = "test key 2";
+		String value2 = "test value 2";
+
+		writeBatch.put(key1.getBytes(), value1.getBytes());
+		writeBatch.delete(key1.getBytes());
+		writeBatch.delete(key2.getBytes());
+		writeBatch.put(key2.getBytes(), value2.getBytes());
+		writeBatch.put(key1.getBytes(), value1.getBytes());
+
+		writeBatch.forEach(handler);
+
+		inOrder.verify(handler).put(key1.getBytes(), value1.getBytes());
+		inOrder.verify(handler).delete(key1.getBytes());
+		inOrder.verify(handler).delete(key2.getBytes());
+		inOrder.verify(handler).put(key2.getBytes(), value2.getBytes());
+		inOrder.verify(handler).put(key1.getBytes(), value1.getBytes());
+		inOrder.verifyNoMoreInteractions();
 	}
 
 	@Test
-	public void testForEach() throws Exception {
+	public void
+	shouldClearRecordsAfterClearOperation() throws Exception {
+		writeBatch.put("test key".getBytes(), "test value".getBytes());
+		writeBatch.delete("test key".getBytes());
+		writeBatch.clear();
 
-	}
+		writeBatch.forEach(handler);
 
-	@Test
-	public void testToByteBuffer() throws Exception {
-
+		verifyZeroInteractions(handler);
 	}
 }
