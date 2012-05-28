@@ -68,6 +68,15 @@ public final class ByteArrayBuilder {
 		return size;
 	}
 
+	public void trimToSize() {
+		data = ByteArrays.trim(data, size);
+	}
+
+	public void clear() {
+		Arrays.fill(data, (byte) 0);
+		size = 0;
+	}
+
 	public void setByte(int offset, byte value) {
 		data[offset] = value;
 	}
