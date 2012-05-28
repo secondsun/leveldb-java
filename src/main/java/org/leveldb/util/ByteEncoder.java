@@ -41,6 +41,8 @@ public abstract class ByteEncoder {
 		}
 	}
 
+	public abstract ByteOrder getByteOrder();
+
 	public abstract void encodeShort(byte[] data, int offset, short value);
 
 	public abstract void encodeInt(byte[] data, int offset, int value);
@@ -54,6 +56,11 @@ public abstract class ByteEncoder {
 	public abstract long decodeLong(byte[] data, int offset);
 
 	private static final class BigEndianByteEncoding extends ByteEncoder {
+		@Override
+		public ByteOrder getByteOrder() {
+			return ByteOrder.BIG_ENDIAN;
+		}
+
 		@Override
 		public void encodeShort(byte[] data, int offset, short value) {
 			data[offset] = (byte) (value >> 8);
@@ -108,6 +115,11 @@ public abstract class ByteEncoder {
 	}
 
 	private static final class LittleEndianByteEncoding extends ByteEncoder {
+		@Override
+		public ByteOrder getByteOrder() {
+			return ByteOrder.LITTLE_ENDIAN;
+		}
+
 		@Override
 		public void encodeShort(byte[] data, int offset, short value) {
 			data[offset + 1] = (byte) (value >> 8);
