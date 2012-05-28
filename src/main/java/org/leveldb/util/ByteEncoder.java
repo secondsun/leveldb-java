@@ -18,22 +18,22 @@ package org.leveldb.util;
 
 import java.nio.ByteOrder;
 
-public abstract class ByteEnconder {
-	private static final ByteEnconder BIG_ENDIAN = new BigEndianByteEncoding();
-	private static final ByteEnconder LITTLE_ENDIAN = new LittleEndianByteEncoding();
+public abstract class ByteEncoder {
+	private static final ByteEncoder BIG_ENDIAN = new BigEndianByteEncoding();
+	private static final ByteEncoder LITTLE_ENDIAN = new LittleEndianByteEncoding();
 
-	private ByteEnconder() {
+	private ByteEncoder() {
 	}
 
-	public static ByteEnconder bigEndian() {
+	public static ByteEncoder bigEndian() {
 		return BIG_ENDIAN;
 	}
 
-	public static ByteEnconder littleEndian() {
+	public static ByteEncoder littleEndian() {
 		return LITTLE_ENDIAN;
 	}
 
-	public static ByteEnconder forByteOrder(ByteOrder byteOrder) {
+	public static ByteEncoder forByteOrder(ByteOrder byteOrder) {
 		if (byteOrder == ByteOrder.BIG_ENDIAN) {
 			return bigEndian();
 		} else {
@@ -53,7 +53,7 @@ public abstract class ByteEnconder {
 
 	public abstract long decodeLong(byte[] data, int offset);
 
-	private static final class BigEndianByteEncoding extends ByteEnconder {
+	private static final class BigEndianByteEncoding extends ByteEncoder {
 		@Override
 		public void encodeShort(byte[] data, int offset, short value) {
 			data[offset] = (byte) (value >> 8);
@@ -107,7 +107,7 @@ public abstract class ByteEnconder {
 		}
 	}
 
-	private static final class LittleEndianByteEncoding extends ByteEnconder {
+	private static final class LittleEndianByteEncoding extends ByteEncoder {
 		@Override
 		public void encodeShort(byte[] data, int offset, short value) {
 			data[offset + 1] = (byte) (value >> 8);

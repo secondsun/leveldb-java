@@ -21,9 +21,9 @@ import org.junit.Test;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 
-public class ByteEnconderTest {
-	private final ByteEnconder bigEndianEncoder = ByteEnconder.bigEndian();
-	private final ByteEnconder littleEndianEncoder = ByteEnconder.littleEndian();
+public class ByteEncoderTest {
+	private final ByteEncoder bigEndianEncoder = ByteEncoder.bigEndian();
+	private final ByteEncoder littleEndianEncoder = ByteEncoder.littleEndian();
 
 	@Test
 	public void
