@@ -20,6 +20,7 @@ import org.junit.Test;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.is;
 
 public class ByteEncoderTest {
 	private final ByteEncoder bigEndianEncoder = ByteEncoder.bigEndian();
@@ -33,7 +34,7 @@ public class ByteEncoderTest {
 
 		bigEndianEncoder.encodeShort(actual, 0, (short) 0x2345);
 
-		assertThat(actual, equalTo(expected));
+		assertThat(actual, is(equalTo(expected)));
 	}
 
 	@Test
@@ -44,7 +45,7 @@ public class ByteEncoderTest {
 
 		bigEndianEncoder.encodeShort(actual, 1, (short) 0xFEDC);
 
-		assertThat(actual, equalTo(expected));
+		assertThat(actual, is(equalTo(expected)));
 	}
 
 	@Test
@@ -55,7 +56,7 @@ public class ByteEncoderTest {
 
 		littleEndianEncoder.encodeShort(actual, 0, (short) 0x2345);
 
-		assertThat(actual, equalTo(expected));
+		assertThat(actual, is(equalTo(expected)));
 	}
 
 	@Test
@@ -66,7 +67,7 @@ public class ByteEncoderTest {
 
 		littleEndianEncoder.encodeShort(actual, 1, (short) 0xFEDC);
 
-		assertThat(actual, equalTo(expected));
+		assertThat(actual, is(equalTo(expected)));
 	}
 
 	@Test
@@ -77,7 +78,7 @@ public class ByteEncoderTest {
 
 		bigEndianEncoder.encodeInt(actual, 0, 0x12131415);
 
-		assertThat(actual, equalTo(expected));
+		assertThat(actual, is(equalTo(expected)));
 	}
 
 	@Test
@@ -88,7 +89,7 @@ public class ByteEncoderTest {
 
 		bigEndianEncoder.encodeInt(actual, 1, 0xFFEEDDCC);
 
-		assertThat(actual, equalTo(expected));
+		assertThat(actual, is(equalTo(expected)));
 	}
 
 	@Test
@@ -99,7 +100,7 @@ public class ByteEncoderTest {
 
 		littleEndianEncoder.encodeInt(actual, 0, 0x12131415);
 
-		assertThat(actual, equalTo(expected));
+		assertThat(actual, is(equalTo(expected)));
 	}
 
 	@Test
@@ -110,7 +111,7 @@ public class ByteEncoderTest {
 
 		littleEndianEncoder.encodeInt(actual, 1, 0xFFEEDDCC);
 
-		assertThat(actual, equalTo(expected));
+		assertThat(actual, is(equalTo(expected)));
 	}
 
 	@Test
@@ -121,7 +122,7 @@ public class ByteEncoderTest {
 
 		bigEndianEncoder.encodeLong(actual, 0, 0x1213141516171819L);
 
-		assertThat(actual, equalTo(expected));
+		assertThat(actual, is(equalTo(expected)));
 	}
 
 	@Test
@@ -134,7 +135,7 @@ public class ByteEncoderTest {
 
 		bigEndianEncoder.encodeLong(actual, 1, 0xFFEEDDCCBBAA9988L);
 
-		assertThat(actual, equalTo(expected));
+		assertThat(actual, is(equalTo(expected)));
 	}
 
 	@Test
@@ -145,7 +146,7 @@ public class ByteEncoderTest {
 
 		littleEndianEncoder.encodeLong(actual, 0, 0x1213141516171819L);
 
-		assertThat(actual, equalTo(expected));
+		assertThat(actual, is(equalTo(expected)));
 	}
 
 	@Test
@@ -158,6 +159,6 @@ public class ByteEncoderTest {
 
 		littleEndianEncoder.encodeLong(actual, 1, 0xFFEEDDCCBBAA9988L);
 
-		assertThat(actual, equalTo(expected));
+		assertThat(actual, is(equalTo(expected)));
 	}
 }
